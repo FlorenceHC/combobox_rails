@@ -1,0 +1,55 @@
+<script type="text/javascript">
+  window.AnalyticsMock = (function() {
+    return {
+      events: [],
+      identifies: [],
+      analytics_pages: [],
+    };
+  })();
+
+  window.analytics = {
+    analyticsName: "AnalyticsNullJsMock",
+    alias() {},
+    ready(callback) {
+      return this.readyCallback = callback;
+    },
+
+    load() {
+      window.ga = function(action, hitType, category, variable, value) {
+        return [];
+      };
+
+      if (typeof this.readyCallback === "function") {
+        return this.readyCallback();
+      }
+    },
+
+    identify(userId, traits) {
+      return {
+        userId,
+        traits
+      };
+    },
+
+    page(eventName, properties) {
+      return {
+        name: eventName,
+        properties
+      };
+    },
+
+    trackLink(_element, eventName, properties) {
+      return {
+        name: eventName,
+        properties
+      };
+    },
+
+    track(eventName, properties) {
+      return {
+        name: eventName,
+        properties
+      };
+    }
+  };
+</script>

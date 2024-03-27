@@ -13,7 +13,7 @@ class TasksController < ApplicationController
   end
 
   def index
-    @tasks = TASKS
-    @task = TASKS.find { |t| t.id == params[:task_id] }
+    @task = TASKS.first
+    @tasks = TASKS.filter { |task| task.name.include?(params[:task_search] || "")}
  end
 end

@@ -25,4 +25,5 @@ Gem::Specification.new do |spec|
   # TODO: Scope dependency versions
   spec.add_dependency "rails", ">= 7.1.3.2"
   spec.add_dependency "view_component", ">= 3.11.0"
+  spec.add_dependency "importmap-rails"
 end
