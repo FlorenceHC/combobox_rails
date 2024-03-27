@@ -1,1 +1,26 @@
-<%= tag.h1 "HI" %>
+<%= form_with do |f|%>
+  <%= render SelectComponent.new(
+    form: f,
+    name: :task_id,
+    placeholder: "Select task",
+    label: "Task",
+    required: true,
+    fetch_url: tasks_url,
+    fetch_field_name: "task_search"
+  ) do |select| %>
+    <% if @task.present? %>
+      <%= select.with_selected_item(item: @task).with_content(@task.name) %>
+    <% end %>
+
+    <%= select.with_select_list do |select_list| %>
+      <% @tasks.each do |task| %>
+        <%= select_list.with_select_list_item(item: task) do |select_list_item| %>
+          <%= task.name %>
+          <% select_list_item.with_selected_item do %>
+            <%= task.name %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

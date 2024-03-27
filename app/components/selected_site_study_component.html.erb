@@ -1,0 +1,13 @@
+<div>
+  <span class="font-semibold">
+    <%= site_location_name %>
+  </span>: 
+  <% if sponsor_website.present? %>
+    <%= render FaviconComponent.new(
+      domain: sponsor_website,
+      alt: "#{sponsor_name} icon",
+      classes: "inline-block mr-0.5"
+    ) %>
+  <% end %>
+  <%= study_protocol_id %>
+</div>

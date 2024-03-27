@@ -1,0 +1,115 @@
+<%= tag.div(
+  class: "hidden relative space-y-1",
+  data: {
+    controller: "select-component visible-with-js",
+    action: token_list(
+      "combobox-commit->select-component#updateSelected",
+      action
+    ),
+    select_component_src_value: fetch_url_with_field_name,
+    select_component_multiple_value: multiple,
+    select_component_new_item_param_name_value: new_item_param_name
+  }
+) do %>
+  <%= label_tag(
+    fetch_field_name,
+    class: token_list(
+      "block text-sm font-medium text-gray-700 string required",
+      required_classes,
+      label_visible_classes
+    )
+  ) do %>
+    <%= label %>
+    <% if required %>
+      <abbr title="required">*</abbr>
+    <% end %>
+  <% end %>
+
+  <%= tag.div(
+    class: token_list(
+      "flex justify-start space-x-1 flex-wrap",
+      "appearance-none w-full",
+      "bg-white",
+      "px-3 py-2",
+      "border border-gray-300",
+      "rounded-md shadow-sm",
+      "placeholder-gray-400",
+      "focus-within:outline-none focus-within:ring-indigo-500 focus-within:border-indigo-500",
+      "sm:text-sm",
+      classes
+    )
+  ) do %>
+    <%= tag.div(
+      data: {select_component_target: "selected"},
+      class: "flex flex-wrap gap-2"
+    ) do %>
+      <%= form.hidden_field name, multiple: multiple, value: nil %>
+
+      <% if selected_items? %>
+        <% selected_items.each do |selected_item| %>
+          <%= selected_item %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%= text_field_tag(
+      fetch_field_name, 
+      nil, 
+      {
+        placeholder: placeholder,
+        data: {
+          action: token_list(
+            "input->select-component#updateList",
+            "input->select-component#setNewItemUrlParam",
+            "input->select-component#showMenu",
+            "focus->select-component#showMenu",
+            "click->select-component#showMenu",
+            "focusout->select-component#hideMenu",
+            "keydown->select-component#keydown"
+          ),
+          select_component_target: "input"
+        },
+        aria: {
+          required: required
+        },
+        autocomplete: "off",
+        class: "p-0 grow",
+        style: reset_visible_tailwind_input_defaults
+      }
+    ) %>
+  <% end %>
+
+  <% if remote? %>
+    <%= tag.turbo_frame(
+      id: fetch_frame_id, 
+      data: {
+        select_component_target: "menu frame",
+        action: "mousedown->select-component#interactingWithMenu"
+      }, 
+      hidden: true,
+      src: select_list? ? nil : fetch_url_with_field_name,
+      class: "absolute w-full z-10"
+    ) do %>
+      <% if select_list? %>
+        <%= select_list %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= tag.div(
+      data: {
+        select_component_target: "menu",
+        action: "mousedown->select-component#interactingWithMenu"
+      }, 
+      hidden: true,
+      class: "absolute w-full z-10"
+    ) do %>
+      <%= select_list %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if noscript_fallback? %>
+  <%= tag.noscript(data: { controller: "remove-if-js" }) do %>
+    <%= noscript_fallback %>
+  <% end %>
+<% end %>

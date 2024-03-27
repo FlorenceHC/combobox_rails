@@ -1,0 +1,21 @@
+<%= link_to(
+  url,
+  id: id,
+  role: "option",
+  target: target,
+  class: token_list(
+    "w-full block",
+    "p-2",
+    "hover:cursor-pointer hover:bg-gray-50 hover:ring-1 hover:ring-inset hover:ring-florence-purple",
+    "aria-selected:bg-gray-50 aria-selected:ring-1 aria-selected:ring-inset aria-selected:ring-florence-purple",
+    "first:rounded-t-md last:rounded-b-md",
+    classes
+  ),
+  data: {
+    turbo_frame: "_top",
+    select_component_target: "listOption"
+  }.merge(tracking_data_attrs)
+) do %>
+  <%= content %>
+<% end %>
+

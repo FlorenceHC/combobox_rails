@@ -1,0 +1,25 @@
+<%= tag.div(
+  class: token_list(
+    "flex items-center min-w-max",
+    "rounded-full border bg-gray-100",
+    "px-2 py-1",
+  ),
+  data: {
+    controller: "remove",
+    remove_target: "removee"
+  }
+) do %>
+  <%= hidden_id_field %>
+  <span class="text-sm"><%= content %></span>
+  <%= tag.button(
+    type: "button",
+    data: { action: "remove#call" },
+    aria: { label: t("labels.remove") },
+    class: "ml-1"
+  ) do %>
+    <%= render HeroiconComponent.new(
+      icon: "x-mark",
+      classes: "hover:text-red-400"
+    ) %>
+  <% end %>
+<% end %>

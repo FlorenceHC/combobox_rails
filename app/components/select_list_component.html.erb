@@ -1,0 +1,44 @@
+<%= tag.ul(
+  role: "listbox",
+  data: { select_component_target: "list" },
+  class: token_list(
+    "bg-white divide-y divide-gray-100",
+    "max-h-60 overflow-auto",
+    fetch_result_counts? ? "border-x border-t" : "border",
+    fetch_result_counts? ? "rounded-t-md" : "rounded-md",
+    classes
+  ),
+) do %>
+  <% select_list_items.each do |select_list_item| %>
+    <%= select_list_item %>
+  <% end %>
+  <% select_list_link_items.each do |select_list_link_item| %>
+    <%= select_list_link_item %>
+  <% end %>
+
+  <%= tag.div(
+    class: token_list(
+      "p-2",
+      "hover:cursor-pointer hover:bg-gray-50 hover:ring-1 hover:ring-inset hover:ring-florence-purple",
+      "aria-selected:bg-gray-50 aria-selected:ring-1 aria-selected:ring-inset aria-selected:ring-florence-purple",
+      "first:rounded-t-md last:rounded-b-md"
+    ),
+    data: { select_component_target: "emptyResults" },
+    hidden: select_list_items? || select_list_link_items?
+  ) do %>
+    <% if no_match_state? %>
+      <%= no_match_state %>
+    <% else %>
+      <%= tag.p(
+        t("labels.no_results_found"),
+        class: "p-2"
+      ) %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if fetch_result_counts? %>
+  <div class="bg-gray-100 border p-2 rounded-b-md flex justify-between items-center">
+    <%= fetch_result_counts %>
+  </div>
+<% end %>

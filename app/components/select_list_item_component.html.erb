@@ -1,0 +1,20 @@
+<%= tag.li(
+  id: dom_id(item),
+  role: "option",
+  class: token_list(
+    "p-2",
+    "hover:cursor-pointer hover:bg-gray-50 hover:ring-1 hover:ring-inset hover:ring-florence-purple",
+    "aria-selected:bg-gray-50 aria-selected:ring-1 aria-selected:ring-inset aria-selected:ring-florence-purple",
+    "first:rounded-t-md last:rounded-b-md",
+    classes
+  ),
+  data: {
+    select_component_target: "listOption"
+  }
+) do %>
+  <%= content %>
+  <template>
+    <%= selected_item  %>
+  </template>
+<% end %>
+
