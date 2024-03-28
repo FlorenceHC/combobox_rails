@@ -45,6 +45,6 @@ class SelectListComponent < ApplicationComponent
   attr_reader :select_field_name, :classes
 
   def showing_out_of_total(visible:, total:, items_name:)
-    "Showing #{visible} out of #{total} #{items_name.pluralize}"
+    "showing #{visible} out of #{total} #{items_name.pluralize}"
   end
 end

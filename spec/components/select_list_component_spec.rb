@@ -12,7 +12,7 @@ RSpec.describe SelectListComponent, type: :component do
         )
       end
 
-      expect(page).to have_content("Showing 10 out of 100 items")
+      expect(page).to have_content("showing 10 out of 100 items")
     end
   end
 end
