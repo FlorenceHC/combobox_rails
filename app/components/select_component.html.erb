@@ -30,11 +30,12 @@
       "flex justify-start space-x-1 flex-wrap",
       "appearance-none w-full",
       "bg-white",
-      "px-3 py-2",
+      "px-3 py-1.5",
       "border border-gray-300",
       "rounded-md shadow-sm",
       "placeholder-gray-400",
       "focus-within:outline-none focus-within:ring-indigo-500 focus-within:border-indigo-500",
+      "focus-within:ring-1",
       "sm:text-sm",
       classes
     )
@@ -53,8 +54,8 @@
     <% end %>
 
     <%= text_field_tag(
-      fetch_field_name, 
-      nil, 
+      fetch_field_name,
+      nil,
       {
         placeholder: placeholder,
         data: {
@@ -81,11 +82,11 @@
 
   <% if remote? %>
     <%= tag.turbo_frame(
-      id: fetch_frame_id, 
+      id: fetch_frame_id,
       data: {
         select_component_target: "menu frame",
         action: "mousedown->select-component#interactingWithMenu"
-      }, 
+      },
       hidden: true,
       src: select_list? ? nil : fetch_url_with_field_name,
       class: "absolute w-full z-10"
@@ -99,7 +100,7 @@
       data: {
         select_component_target: "menu",
         action: "mousedown->select-component#interactingWithMenu"
-      }, 
+      },
       hidden: true,
       class: "absolute w-full z-10"
     ) do %>
