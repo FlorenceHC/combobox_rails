@@ -2,10 +2,9 @@
 
 class SelectListComponent < ApplicationComponent
   renders_one :no_match_state
-  renders_one :fetch_result_counts, ->(visible:, total:, items_name: t("labels.items")) do
+  renders_one :fetch_result_counts, ->(visible:, total:, items_name: "items") do
     tag.p(
-      t(
-        "labels.showing_out_of_total",
+      showing_out_of_total(
         visible: visible,
         total: total,
         items_name: items_name
@@ -44,4 +43,8 @@ class SelectListComponent < ApplicationComponent
   private
 
   attr_reader :select_field_name, :classes
+
+  def showing_out_of_total(visible:, total:, items_name:)
+    "Showing #{visible} out of #{total} #{items_name.pluralize}"
+  end
 end

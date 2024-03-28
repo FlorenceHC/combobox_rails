@@ -40,6 +40,7 @@ TODO
     ```
 - Migrate tests
 - CI after testing is setup
+- Dependency on specific translations
 
 ## Usage
 How to use my plugin.
