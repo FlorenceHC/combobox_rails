@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 import Combobox from "@github/combobox-nav"
 import debounce from "lodash.debounce"
 
+console.log("LOADED SELECT COMPONENT CONTROLLER JS")
 // Connects to data-controller="select-component"
 export default class extends Controller {
   static values = {
