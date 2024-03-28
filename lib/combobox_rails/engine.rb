@@ -16,6 +16,7 @@ module ComboboxRails
 
     # NOTE: add engine manifest to precompile assets in production
     initializer "combobox_rails.assets.precompile" do |app|
+      app.config.assets.paths << Engine.root.join('app/javascript')
       app.config.assets.precompile += %w[combobox_rails_manifest]
     end
   end
